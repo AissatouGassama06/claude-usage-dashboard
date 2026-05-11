@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Usage — iAdvize</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" integrity="sha384-3X60H6fF5MeFBYIA0IaVpJPfsZFMJCVQ22iGnCrGIiE5VIcPkPQ5YMD7L2b3v4MK" crossorigin="anonymous">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #1a1a1a; padding: 20px; max-width: 960px; margin: 0 auto; }
+
+.header { margin-bottom: 24px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+.header .subtitle { font-size: 13px; color: #888; margin-top: 4px; }
+.header .last-update { font-size: 12px; color: #aaa; margin-top: 2px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.card { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e8e8e8; }
+.card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 6px; }
+.card .value { font-size: 26px; font-weight: 700; }
+.card .detail { font-size: 12px; color: #888; margin-top: 4px; }
+.card.warning .value { color: #e67700; }
+.card.danger .value { color: #e03131; }
+.card.ok .value { color: #2b8a3e; }
+
+.progress-container { margin-top: 10px; }
+.progress-bar { width: 100%; height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+.section { margin-bottom: 28px; }
+.section h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #333; }
+
+.chart-container { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #e8e8e8; margin-bottom: 20px; }
+.chart-container canvas { max-height: 280px; }
+
+#users-table { margin-top: 8px; }
+
+.alert-banner { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; display: none; }
+.alert-banner.warning { background: #fff3e0; border: 1px solid #ffb74d; color: #e65100; display: block; }
+.alert-banner.danger { background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; display: block; }
+
+.delta-positive { color: #e03131; }
+.delta-negative { color: #2b8a3e; }
+
+.gridjs-th { font-size: 12px !important; text-transform: uppercase !important; }
+.gridjs-td { font-size: 13px !important; }
+
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; font-size: 11px; color: #bbb; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Claude Usage Dashboard</h1>
+  <div class="subtitle">Organisation iAdvize</div>
+  <div class="last-update" id="lastUpdate"></div>
+</div>
+
+<div id="alertBanner" class="alert-banner"></div>
+
+<div id="mainContent">
+  <div class="cards" id="cardsContainer"></div>
+
+  <div class="section">
+    <h2>Evolution de l'extra-usage MTD</h2>
+    <div class="chart-container">
+      <canvas id="spendChart"></canvas>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Delta quotidien</h2>
+    <div class="chart-container">
+      <canvas id="deltaChart"></canvas>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Extra-usage par utilisateur</h2>
+    <div id="users-table"></div>
+  </div>
+</div>
+
+<footer>Mis a jour automatiquement par Cowork — iAdvize</footer>
+
+<script>
+// ===== DATA STORE =====
+// This data is updated by the scheduled task "claude-usage-daily-report"
+// Each run appends a new entry and updates this artifact.
+const USAGE_DATA = {
+  "organization": "iAdvize",
+  "monthly_limit": 1000,
+  "entries": [
+    {
+      "date": "2026-05-11",
+      "balance": 1127.80,
+      "mtd_spent": 703.98,
+      "pct_used": 70,
+      "reset_date": "2026-06-01",
+      "total_users": 124,
+      "standard_seats": 110,
+      "premium_seats": 14,
+      "users_with_spend": [
+        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 110.26, "custom_limit": 250},
+        {"name": "Aurelie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 100},
+        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 100},
+        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 50.10},
+        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 49.99},
+        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 43.78},
+        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
+        {"name": "Melanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
+        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
+        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 26.78},
+        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
+        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 20.83},
+        {"name": "Michael MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
+        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 18.90},
+        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 18.32},
+        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
+        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 14.29},
+        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 12.50},
+        {"name": "Clementine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 10.26},
+        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
+        {"name": "Chloe MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
+        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 7.43},
+        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 6.33},
+        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 5.49},
+        {"name": "Aissatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
+        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 3.68},
+        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 3.33},
+        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 3.05},
+        {"name": "David", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 2.74},
+        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
+        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
+        {"name": "francesca", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 1.97},
+        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 1.95},
+        {"name": "Basile Quinchon", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
+        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
+        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
+        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
+        {"name": "The goat", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
+        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.51},
+        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+      ],
+      "extra_usage_enabled": true
+    }
+  ]
+};
+// ===== END DATA STORE =====
+
+function render(data) {
+  const entries = data.entries || [];
+  if (entries.length === 0) {
+    document.getElementById('mainContent').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">Aucune donnee enregistree.</div>';
+    return;
+  }
+
+  const latest = entries[entries.length - 1];
+  const prev = entries.length > 1 ? entries[entries.length - 2] : null;
+  const limit = data.monthly_limit || 1000;
+
+  document.getElementById('lastUpdate').textContent = 'Derniere mise a jour : ' + latest.date;
+
+  const pct = latest.pct_used || Math.round((latest.mtd_spent / limit) * 100);
+  const alertEl = document.getElementById('alertBanner');
+  if (pct >= 90) {
+    alertEl.className = 'alert-banner danger';
+    alertEl.textContent = 'Alerte : ' + pct + '% du budget mensuel consomme. Solde restant : ' + formatEur(limit - latest.mtd_spent);
+  } else if (pct >= 75) {
+    alertEl.className = 'alert-banner warning';
+    alertEl.textContent = 'Attention : ' + pct + '% du budget mensuel consomme.';
+  }
+
+  const dailyDelta = prev ? +(latest.mtd_spent - prev.mtd_spent).toFixed(2) : null;
+
+  const pctClass = pct >= 90 ? 'danger' : pct >= 75 ? 'warning' : 'ok';
+  document.getElementById('cardsContainer').innerHTML = `
+    <div class="card ok">
+      <div class="label">Current Balance</div>
+      <div class="value">${formatEur(latest.balance)}</div>
+      <div class="detail">Reset : ${latest.reset_date || '—'}</div>
+    </div>
+    <div class="card ${pctClass}">
+      <div class="label">Extra-usage MTD</div>
+      <div class="value">${formatEur(latest.mtd_spent)}</div>
+      <div class="detail">${pct}% du plafond de ${formatEur(limit)}</div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${Math.min(pct,100)}%; background:${pct>=90?'#e03131':pct>=75?'#e67700':'#2b8a3e'};"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">Delta quotidien</div>
+      <div class="value ${dailyDelta !== null ? (dailyDelta > 0 ? 'delta-positive' : 'delta-negative') : ''}">${dailyDelta !== null ? (dailyDelta >= 0 ? '+' : '') + formatEur(dailyDelta) : 'N/A'}</div>
+      <div class="detail">${dailyDelta !== null ? 'vs. ' + prev.date : 'Premiere entree'}</div>
+    </div>
+    <div class="card ${(latest.users_with_spend || []).length > 20 ? 'warning' : ''}">
+      <div class="label">En extra-usage</div>
+      <div class="value">${(latest.users_with_spend || []).length}</div>
+      <div class="detail">sur ${latest.total_users || '?'} utilisateurs (${latest.standard_seats||0} std + ${latest.premium_seats||0} prem)</div>
+    </div>
+  `;
+
+  const labels = entries.map(e => e.date);
+  const spendData = entries.map(e => e.mtd_spent);
+  const balanceData = entries.map(e => e.balance);
+
+  new Chart(document.getElementById('spendChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'MTD Spent', data: spendData, borderColor: '#4263eb', backgroundColor: 'rgba(66,99,235,0.08)', fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
+        { label: 'Balance', data: balanceData, borderColor: '#2b8a3e', borderDash: [5,5], fill: false, tension: 0.3, pointRadius: 3, borderWidth: 2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + formatEur(ctx.parsed.y) } } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => formatEur(v), font: { size: 11 } }, grid: { color: '#f0f0f0' } }, x: { ticks: { font: { size: 11 } }, grid: { display: false } } }
+    }
+  });
+
+  const deltas = entries.map((e, i) => i === 0 ? 0 : +(e.mtd_spent - entries[i-1].mtd_spent).toFixed(2));
+  new Chart(document.getElementById('deltaChart'), {
+    type: 'bar',
+    data: { labels, datasets: [{ label: 'Delta quotidien', data: deltas, backgroundColor: deltas.map(d => d >= 0 ? 'rgba(224,49,49,0.7)' : 'rgba(43,138,62,0.7)'), borderRadius: 4 }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => (ctx.parsed.y >= 0 ? '+' : '') + formatEur(ctx.parsed.y) } } },
+      scales: { y: { ticks: { callback: v => formatEur(v), font: { size: 11 } }, grid: { color: '#f0f0f0' } }, x: { ticks: { font: { size: 11 } }, grid: { display: false } } }
+    }
+  });
+
+  const users = (latest.users_with_spend || []).sort((a, b) => b.mtd_spend - a.mtd_spend);
+  if (users.length > 0) {
+    new gridjs.Grid({
+      columns: [ { name: 'Nom', width: '35%' }, { name: 'Email', width: '40%' }, { name: 'MTD Spend', width: '25%', formatter: cell => formatEur(cell), sort: { compare: (a, b) => a - b } } ],
+      data: users.map(u => [u.name, u.email, u.mtd_spend]),
+      sort: true, style: { table: { 'font-size': '13px' } }
+    }).render(document.getElementById('users-table'));
+  } else {
+    document.getElementById('users-table').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">Aucun utilisateur avec un spend &gt; 0</div>';
+  }
+}
+
+function formatEur(n) {
+  if (n == null) return 'N/A';
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+}
+
+render(USAGE_DATA);
+</script>
+</body>
+</html>
