@@ -179,9 +179,9 @@ function render(data) {
   const pctClass = pct >= 90 ? 'danger' : pct >= 75 ? 'warning' : 'ok';
   document.getElementById('cardsContainer').innerHTML = `
     <div class="card ok">
-      <div class="label">Current Balance</div>
+      <div class="label">Crédit restant</div>
       <div class="value">${formatEur(latest.balance)}</div>
-      <div class="detail">Reset : ${latest.reset_date || '—'}</div>
+      <div class="detail">Prochain cycle : ${latest.reset_date ? new Date(latest.reset_date).toLocaleDateString('fr-FR', {day:'numeric',month:'long',year:'numeric'}) : '—'}</div>
     </div>
     <div class="card ${pctClass}">
       <div class="label">Extra-usage MTD</div>
@@ -215,7 +215,7 @@ function render(data) {
       labels,
       datasets: [
         { label: 'MTD Spent', data: spendData, borderColor: '#4263eb', backgroundColor: 'rgba(66,99,235,0.08)', fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
-        { label: 'Balance', data: balanceData, borderColor: '#2b8a3e', borderDash: [5,5], fill: false, tension: 0.3, pointRadius: 3, borderWidth: 2 }
+        { label: 'Crédit restant', data: balanceData, borderColor: '#2b8a3e', borderDash: [5,5], fill: false, tension: 0.3, pointRadius: 3, borderWidth: 2 }
       ]
     },
     options: {
@@ -236,15 +236,37 @@ function render(data) {
     }
   });
 
+  // Users table — extra-usage
+  const defaultLimit = 50; // Standard default
   const users = (latest.users_with_spend || []).sort((a, b) => b.mtd_spend - a.mtd_spend);
+
   if (users.length > 0) {
     new gridjs.Grid({
-      columns: [ { name: 'Nom', width: '35%' }, { name: 'Email', width: '40%' }, { name: 'MTD Spend', width: '25%', formatter: cell => formatEur(cell), sort: { compare: (a, b) => a - b } } ],
-      data: users.map(u => [u.name, u.email, u.mtd_spend]),
-      sort: true, style: { table: { 'font-size': '13px' } }
+      columns: [
+        { name: 'Nom', width: '28%' },
+        { name: 'Email', width: '32%' },
+        {
+          name: 'Limite', width: '15%',
+          formatter: cell => cell ? formatEur(cell) : 'Defaut (' + formatEur(defaultLimit) + ')',
+          sort: { compare: (a, b) => (a||defaultLimit) - (b||defaultLimit) }
+        },
+        {
+          name: 'Extra-usage', width: '25%',
+          formatter: (cell, row) => {
+            const lim = row.cells[2].data || defaultLimit;
+            const pctUsed = Math.round((cell / lim) * 100);
+            const color = pctUsed >= 100 ? '#e03131' : pctUsed >= 75 ? '#e67700' : '#1a1a1a';
+            return gridjs.html('<span style="color:' + color + ';font-weight:600;">' + formatEur(cell) + '</span> <span style="color:#aaa;font-size:11px;">(' + pctUsed + '%)</span>');
+          },
+          sort: { compare: (a, b) => a - b }
+        }
+      ],
+      data: users.map(u => [u.name, u.email, u.custom_limit || null, u.mtd_spend]),
+      sort: true,
+      style: { table: { 'font-size': '13px' } }
     }).render(document.getElementById('users-table'));
   } else {
-    document.getElementById('users-table').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">Aucun utilisateur avec un spend &gt; 0</div>';
+    document.getElementById('users-table').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">Aucun extra-usage ce mois-ci</div>';
   }
 }
 
