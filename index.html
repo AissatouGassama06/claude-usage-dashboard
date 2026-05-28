@@ -90,14 +90,13 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; font-s
 // ===== DATA STORE =====
 // This data is updated by the scheduled task "claude-usage-daily-report"
 // Each run appends a new entry and updates this artifact.
-// Last update: 2026-05-27
 const USAGE_DATA = {
   "organization": "iAdvize",
   "monthly_limit": 2000,
   "entries": [
     {
       "date": "2026-05-11",
-      "balance": 1127.80,
+      "balance": 1127.8,
       "mtd_spent": 703.98,
       "pct_used": 70,
       "reset_date": "2026-06-01",
@@ -105,46 +104,206 @@ const USAGE_DATA = {
       "standard_seats": 110,
       "premium_seats": 14,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 110.26},
-        {"name": "Aurelie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 50.10},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 49.99},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 43.78},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Melanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 26.78},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 20.83},
-        {"name": "Michael MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 18.90},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 18.32},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 14.29},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 12.50},
-        {"name": "Clementine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 10.26},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Chloe MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 7.43},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 6.33},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 5.49},
-        {"name": "Aissatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 3.68},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 3.33},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 3.05},
-        {"name": "David", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 2.74},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
-        {"name": "francesca", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 1.97},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 1.95},
-        {"name": "Basile Quinchon", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "The goat", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.51},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 110.26
+        },
+        {
+          "name": "Aurelie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 50.1
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 49.99
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 43.78
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Melanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 26.78
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 20.83
+        },
+        {
+          "name": "Michael MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 18.9
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 18.32
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 14.29
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 12.5
+        },
+        {
+          "name": "Clementine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 10.26
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloe MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 7.43
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 6.33
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 5.49
+        },
+        {
+          "name": "Aissatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 3.68
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 3.33
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 3.05
+        },
+        {
+          "name": "David",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 2.74
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 2.67
+        },
+        {
+          "name": "francesca",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 1.97
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 1.95
+        },
+        {
+          "name": "Basile Quinchon",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "The goat",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.51
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true
     },
@@ -158,52 +317,241 @@ const USAGE_DATA = {
       "standard_seats": 118,
       "premium_seats": 15,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 110.26, "custom_limit": 150},
-        {"name": "Aurelie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 75},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 75},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 52.49, "custom_limit": 75},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 50.49, "custom_limit": 75},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 43.78},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Clementine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 33.00},
-        {"name": "Melanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 27.52},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 22.12},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 20.83},
-        {"name": "Michael MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 18.90},
-        {"name": "Sophie CHEVALIER", "email": "sophie.chevalier@iadvize.com", "mtd_spend": 18.72},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 14.29},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 13.71},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 11.71},
-        {"name": "francesca", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 9.66},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 9.49},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Craig LEBLANC", "email": "craig.leblanc@iadvize.com", "mtd_spend": 8.63},
-        {"name": "Chloe MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 6.33},
-        {"name": "Aissatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 3.68},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 3.33},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 3.05},
-        {"name": "David", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 2.74},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 1.95},
-        {"name": "Basile Quinchon", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Nathan MIERMONT", "email": "nathan.miermont@iadvize.com", "mtd_spend": 1.78},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "Mathieu CHEVIRON", "email": "mathieu.cheviron@iadvize.com", "mtd_spend": 1.13},
-        {"name": "The goat", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Benjamin GREDAT", "email": "benjamin.gredat@iadvize.com", "mtd_spend": 0.62},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.58},
-        {"name": "Charlotte BOUISSE", "email": "charlotte.bouisse@iadvize.com", "mtd_spend": 0.34},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 110.26,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurelie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 52.49,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 50.49,
+          "custom_limit": 75
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 43.78
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Clementine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 33.0
+        },
+        {
+          "name": "Melanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 27.52
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 22.12
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 20.83
+        },
+        {
+          "name": "Michael MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 18.9
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 14.29
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 11.71
+        },
+        {
+          "name": "francesca",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 9.66
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 8.63
+        },
+        {
+          "name": "Chloe MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 6.33
+        },
+        {
+          "name": "Aissatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 3.68
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 3.33
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 3.05
+        },
+        {
+          "name": "David",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 2.74
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 2.67
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 1.95
+        },
+        {
+          "name": "Basile Quinchon",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Nathan MIERMONT",
+          "email": "nathan.miermont@iadvize.com",
+          "mtd_spend": 1.78
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 1.13
+        },
+        {
+          "name": "The goat",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 0.62
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true,
       "daily_delta": 108.09
@@ -218,61 +566,286 @@ const USAGE_DATA = {
       "standard_seats": 121,
       "premium_seats": 14,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 117.44, "custom_limit": 150},
-        {"name": "Aurélie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 75},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 77.33, "custom_limit": 75},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 75.05, "custom_limit": 75},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 75},
-        {"name": "Aude LECHAPELAIN", "email": "aude.lechapelain@iadvize.com", "mtd_spend": 52.39},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 51.69},
-        {"name": "Clémentine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 51.18},
-        {"name": "Alex", "email": "alexandre.dixneuf@iadvize.com", "mtd_spend": 50.09},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 41.84},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 39.62},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Mélanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Benjamin GREDAT", "email": "benjamin.gredat@iadvize.com", "mtd_spend": 28.73},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 26.21},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 24.18},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 22.69},
-        {"name": "Michaël MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 18.88},
-        {"name": "Sophie CHEVALIER", "email": "sophie.chevalier@iadvize.com", "mtd_spend": 18.72},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Craig LEBLANC", "email": "craig.leblanc@iadvize.com", "mtd_spend": 14.91},
-        {"name": "Hélène FEDIDE", "email": "helene.fedide@iadvize.com", "mtd_spend": 14.41},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 14.29},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 13.71},
-        {"name": "francesca", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 13.09},
-        {"name": "Damien ALLIAU", "email": "damien.alliau@iadvize.com", "mtd_spend": 12.15},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 11.71},
-        {"name": "David", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 9.95},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 9.49},
-        {"name": "Mathieu CHEVIRON", "email": "mathieu.cheviron@iadvize.com", "mtd_spend": 9.28},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Chloé MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Cyrus WEIR", "email": "cyrus.weir@iadvize.com", "mtd_spend": 5.42},
-        {"name": "Lilas BLANCHARD", "email": "lilas.blanchard@iadvize.com", "mtd_spend": 5.11},
-        {"name": "Aïssatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 3.68},
-        {"name": "Pierre LE CHANU", "email": "pierre.lechanu@iadvize.com", "mtd_spend": 3.52},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 3.33},
-        {"name": "Celia BUGNIOT", "email": "celia.bugniot@iadvize.com", "mtd_spend": 3.30},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 3.05},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
-        {"name": "Etienne Rouillard", "email": "etienne.rouillard@iadvize.com", "mtd_spend": 2.63},
-        {"name": "Basile Quinchon", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Nathan MIERMONT", "email": "nathan.miermont@iadvize.com", "mtd_spend": 1.78},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "Axel ROLLO", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.58},
-        {"name": "Charlotte BOUISSE", "email": "charlotte.bouisse@iadvize.com", "mtd_spend": 0.34},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 117.44,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurélie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 77.33,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 75.05,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Aude LECHAPELAIN",
+          "email": "aude.lechapelain@iadvize.com",
+          "mtd_spend": 52.39
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 51.69
+        },
+        {
+          "name": "Clémentine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 51.18
+        },
+        {
+          "name": "Alex",
+          "email": "alexandre.dixneuf@iadvize.com",
+          "mtd_spend": 50.09
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 41.84
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 39.62
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Mélanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 28.73
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 26.21
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 24.18
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 22.69
+        },
+        {
+          "name": "Michaël MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 18.88
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 14.91
+        },
+        {
+          "name": "Hélène FEDIDE",
+          "email": "helene.fedide@iadvize.com",
+          "mtd_spend": 14.41
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 14.29
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "francesca",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 13.09
+        },
+        {
+          "name": "Damien ALLIAU",
+          "email": "damien.alliau@iadvize.com",
+          "mtd_spend": 12.15
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 11.71
+        },
+        {
+          "name": "David",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 9.95
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 9.28
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloé MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Cyrus WEIR",
+          "email": "cyrus.weir@iadvize.com",
+          "mtd_spend": 5.42
+        },
+        {
+          "name": "Lilas BLANCHARD",
+          "email": "lilas.blanchard@iadvize.com",
+          "mtd_spend": 5.11
+        },
+        {
+          "name": "Aïssatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 3.68
+        },
+        {
+          "name": "Pierre LE CHANU",
+          "email": "pierre.lechanu@iadvize.com",
+          "mtd_spend": 3.52
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 3.33
+        },
+        {
+          "name": "Celia BUGNIOT",
+          "email": "celia.bugniot@iadvize.com",
+          "mtd_spend": 3.3
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 3.05
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 2.67
+        },
+        {
+          "name": "Etienne Rouillard",
+          "email": "etienne.rouillard@iadvize.com",
+          "mtd_spend": 2.63
+        },
+        {
+          "name": "Basile Quinchon",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Nathan MIERMONT",
+          "email": "nathan.miermont@iadvize.com",
+          "mtd_spend": 1.78
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Axel ROLLO",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true,
       "daily_delta": 357.12
@@ -287,75 +860,357 @@ const USAGE_DATA = {
       "standard_seats": 121,
       "premium_seats": 15,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 117.44, "custom_limit": 150},
-        {"name": "Aurélie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 75},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 77.33, "custom_limit": 75},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 75.05, "custom_limit": 75},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 75},
-        {"name": "Aude LECHAPELAIN", "email": "aude.lechapelain@iadvize.com", "mtd_spend": 52.39},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 51.69},
-        {"name": "Clémentine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 51.18},
-        {"name": "Lilas BLANCHARD", "email": "lilas.blanchard@iadvize.com", "mtd_spend": 50.16},
-        {"name": "Alex", "email": "alexandre.dixneuf@iadvize.com", "mtd_spend": 50.09},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 49.99},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 39.62},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Benjamin GREDAT", "email": "benjamin.gredat@iadvize.com", "mtd_spend": 33.20},
-        {"name": "Mélanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Florent GOSSELIN", "email": "florent@iadvize.com", "mtd_spend": 25.59, "custom_limit": 100},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Damien SEVET", "email": "damien.sevet@iadvize.com", "mtd_spend": 23.57},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 22.69},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 20.03},
-        {"name": "Michaël MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Sophie CHEVALIER", "email": "sophie.chevalier@iadvize.com", "mtd_spend": 18.72},
-        {"name": "Fx CORNEC", "email": "francois-xavier.cornec@iadvize.com", "mtd_spend": 18.24},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Lisa TRAZZI", "email": "lisa.trazzi@iadvize.com", "mtd_spend": 14.95},
-        {"name": "Craig LEBLANC", "email": "craig.leblanc@iadvize.com", "mtd_spend": 14.91},
-        {"name": "Hélène FEDIDE", "email": "helene.fedide@iadvize.com", "mtd_spend": 14.41},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 14.29},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 13.71},
-        {"name": "francesca", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 13.09},
-        {"name": "Mathieu CHEVIRON", "email": "mathieu.cheviron@iadvize.com", "mtd_spend": 12.54},
-        {"name": "Damien ALLIAU", "email": "damien.alliau@iadvize.com", "mtd_spend": 12.15},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 11.71},
-        {"name": "David BONNEMAISON", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 9.95},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 9.55},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 9.49},
-        {"name": "Tiphaine PAIREL", "email": "tiphaine.pairel@iadvize.com", "mtd_spend": 9.38},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Chloé MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Cyrus WEIR", "email": "cyrus.weir@iadvize.com", "mtd_spend": 5.42},
-        {"name": "Aïssatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Lilas CHAMPOT", "email": "lilas.champot@iadvize.com", "mtd_spend": 4.57},
-        {"name": "Audrey RAGUENEAU", "email": "audrey.ragueneau@iadvize.com", "mtd_spend": 4.14},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 3.68},
-        {"name": "Simon GELIN", "email": "simon.gelin@iadvize.com", "mtd_spend": 3.67},
-        {"name": "Pierre LE CHANU", "email": "pierre.lechanu@iadvize.com", "mtd_spend": 3.52},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 3.33},
-        {"name": "Celia BUGNIOT", "email": "celia.bugniot@iadvize.com", "mtd_spend": 3.30},
-        {"name": "Etienne Rouillard", "email": "etienne.rouillard@iadvize.com", "mtd_spend": 2.87},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
-        {"name": "Anaïs MALO", "email": "anais.malo@iadvize.com", "mtd_spend": 2.66},
-        {"name": "Basile QUINCHON", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Nathan MIERMONT", "email": "nathan.miermont@iadvize.com", "mtd_spend": 1.78},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "Aymeric AITAMER", "email": "aymeric.aitamer@iadvize.com", "mtd_spend": 1.44},
-        {"name": "Tillie DEGEORGES", "email": "tillie.degeorges@iadvize.com", "mtd_spend": 1.32},
-        {"name": "Axel ROLLO", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Simon LIOTIER", "email": "simon.liotier@iadvize.com", "mtd_spend": 0.86},
-        {"name": "Sylvie", "email": "sylvie.quach_hiep@iadvize.com", "mtd_spend": 0.66},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.58},
-        {"name": "Charlotte BOUISSE", "email": "charlotte.bouisse@iadvize.com", "mtd_spend": 0.34},
-        {"name": "Déborah TACHEAU", "email": "deborah.tacheau@iadvize.com", "mtd_spend": 0.23},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 117.44,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurélie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 77.33,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 75.05,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Aude LECHAPELAIN",
+          "email": "aude.lechapelain@iadvize.com",
+          "mtd_spend": 52.39
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 51.69
+        },
+        {
+          "name": "Clémentine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 51.18
+        },
+        {
+          "name": "Lilas BLANCHARD",
+          "email": "lilas.blanchard@iadvize.com",
+          "mtd_spend": 50.16
+        },
+        {
+          "name": "Alex",
+          "email": "alexandre.dixneuf@iadvize.com",
+          "mtd_spend": 50.09
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 49.99
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 39.62
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 33.2
+        },
+        {
+          "name": "Mélanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Florent GOSSELIN",
+          "email": "florent@iadvize.com",
+          "mtd_spend": 25.59,
+          "custom_limit": 100
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 23.57
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 22.69
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Michaël MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Fx CORNEC",
+          "email": "francois-xavier.cornec@iadvize.com",
+          "mtd_spend": 18.24
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Lisa TRAZZI",
+          "email": "lisa.trazzi@iadvize.com",
+          "mtd_spend": 14.95
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 14.91
+        },
+        {
+          "name": "Hélène FEDIDE",
+          "email": "helene.fedide@iadvize.com",
+          "mtd_spend": 14.41
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 14.29
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "francesca",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 13.09
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 12.54
+        },
+        {
+          "name": "Damien ALLIAU",
+          "email": "damien.alliau@iadvize.com",
+          "mtd_spend": 12.15
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 11.71
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 9.95
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 9.55
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Tiphaine PAIREL",
+          "email": "tiphaine.pairel@iadvize.com",
+          "mtd_spend": 9.38
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloé MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Cyrus WEIR",
+          "email": "cyrus.weir@iadvize.com",
+          "mtd_spend": 5.42
+        },
+        {
+          "name": "Aïssatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Lilas CHAMPOT",
+          "email": "lilas.champot@iadvize.com",
+          "mtd_spend": 4.57
+        },
+        {
+          "name": "Audrey RAGUENEAU",
+          "email": "audrey.ragueneau@iadvize.com",
+          "mtd_spend": 4.14
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 3.68
+        },
+        {
+          "name": "Simon GELIN",
+          "email": "simon.gelin@iadvize.com",
+          "mtd_spend": 3.67
+        },
+        {
+          "name": "Pierre LE CHANU",
+          "email": "pierre.lechanu@iadvize.com",
+          "mtd_spend": 3.52
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 3.33
+        },
+        {
+          "name": "Celia BUGNIOT",
+          "email": "celia.bugniot@iadvize.com",
+          "mtd_spend": 3.3
+        },
+        {
+          "name": "Etienne Rouillard",
+          "email": "etienne.rouillard@iadvize.com",
+          "mtd_spend": 2.87
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 2.67
+        },
+        {
+          "name": "Anaïs MALO",
+          "email": "anais.malo@iadvize.com",
+          "mtd_spend": 2.66
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Nathan MIERMONT",
+          "email": "nathan.miermont@iadvize.com",
+          "mtd_spend": 1.78
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Aymeric AITAMER",
+          "email": "aymeric.aitamer@iadvize.com",
+          "mtd_spend": 1.44
+        },
+        {
+          "name": "Tillie DEGEORGES",
+          "email": "tillie.degeorges@iadvize.com",
+          "mtd_spend": 1.32
+        },
+        {
+          "name": "Axel ROLLO",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Simon LIOTIER",
+          "email": "simon.liotier@iadvize.com",
+          "mtd_spend": 0.86
+        },
+        {
+          "name": "Sylvie",
+          "email": "sylvie.quach_hiep@iadvize.com",
+          "mtd_spend": 0.66
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Déborah TACHEAU",
+          "email": "deborah.tacheau@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true,
       "daily_delta": 229.03
@@ -370,80 +1225,377 @@ const USAGE_DATA = {
       "standard_seats": 120,
       "premium_seats": 15,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 117.44, "custom_limit": 150},
-        {"name": "Aurélie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 75},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 77.33, "custom_limit": 75},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 75.05, "custom_limit": 75},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 75},
-        {"name": "Aude LECHAPELAIN", "email": "aude.lechapelain@iadvize.com", "mtd_spend": 52.39},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 51.69},
-        {"name": "Clémentine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 51.18},
-        {"name": "Lilas BLANCHARD", "email": "lilas.blanchard@iadvize.com", "mtd_spend": 50.16},
-        {"name": "Alex", "email": "alexandre.dixneuf@iadvize.com", "mtd_spend": 50.09},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 49.99},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 39.62},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Benjamin GREDAT", "email": "benjamin.gredat@iadvize.com", "mtd_spend": 33.20},
-        {"name": "Mélanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 26.48},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 25.76},
-        {"name": "Florent GOSSELIN", "email": "florent@iadvize.com", "mtd_spend": 25.59, "custom_limit": 100},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Damien SEVET", "email": "damien.sevet@iadvize.com", "mtd_spend": 23.57},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 22.69},
-        {"name": "David BONNEMAISON", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 21.92},
-        {"name": "Romain HELES", "email": "romain.heles@iadvize.com", "mtd_spend": 20.03},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 20.03},
-        {"name": "Michaël MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Sophie CHEVALIER", "email": "sophie.chevalier@iadvize.com", "mtd_spend": 18.72},
-        {"name": "Fx CORNEC", "email": "francois-xavier.cornec@iadvize.com", "mtd_spend": 18.24},
-        {"name": "Mathieu CHEVIRON", "email": "mathieu.cheviron@iadvize.com", "mtd_spend": 16.17},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Lisa TRAZZI", "email": "lisa.trazzi@iadvize.com", "mtd_spend": 14.95},
-        {"name": "Craig LEBLANC", "email": "craig.leblanc@iadvize.com", "mtd_spend": 14.91},
-        {"name": "Hélène FEDIDE", "email": "helene.fedide@iadvize.com", "mtd_spend": 14.41},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 13.71},
-        {"name": "Francesca IANNUZZI", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 13.09},
-        {"name": "Damien ALLIAU", "email": "damien.alliau@iadvize.com", "mtd_spend": 12.15},
-        {"name": "Lilas CHAMPOT", "email": "lilas.champot@iadvize.com", "mtd_spend": 10.61},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 9.55},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 9.49},
-        {"name": "Tiphaine PAIREL", "email": "tiphaine.pairel@iadvize.com", "mtd_spend": 9.38},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Chloé MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Cyrus WEIR", "email": "cyrus.weir@iadvize.com", "mtd_spend": 5.42},
-        {"name": "Aïssatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 4.81},
-        {"name": "Sylvie", "email": "sylvie.quach_hiep@iadvize.com", "mtd_spend": 4.77},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 4.67},
-        {"name": "Audrey RAGUENEAU", "email": "audrey.ragueneau@iadvize.com", "mtd_spend": 4.14},
-        {"name": "Simon GELIN", "email": "simon.gelin@iadvize.com", "mtd_spend": 3.67},
-        {"name": "Pierre LE CHANU", "email": "pierre.lechanu@iadvize.com", "mtd_spend": 3.52},
-        {"name": "Marine", "email": "marine.pereira@iadvize.com", "mtd_spend": 3.45},
-        {"name": "Anaïs MALO", "email": "anais.malo@iadvize.com", "mtd_spend": 3.39},
-        {"name": "Celia BUGNIOT", "email": "celia.bugniot@iadvize.com", "mtd_spend": 3.30},
-        {"name": "Etienne Rouillard", "email": "etienne.rouillard@iadvize.com", "mtd_spend": 2.87},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 2.67},
-        {"name": "Chloé PUGNETTI", "email": "chloe.pugnetti@iadvize.com", "mtd_spend": 2.56},
-        {"name": "Basile QUINCHON", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Alexandre", "email": "alexandre.lebrun@iadvize.com", "mtd_spend": 1.81},
-        {"name": "Nathan MIERMONT", "email": "nathan.miermont@iadvize.com", "mtd_spend": 1.78},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "Aymeric AITAMER", "email": "aymeric.aitamer@iadvize.com", "mtd_spend": 1.44},
-        {"name": "Tillie DEGEORGES", "email": "tillie.degeorges@iadvize.com", "mtd_spend": 1.32},
-        {"name": "Axel ROLLO", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Christelle ROUILLE", "email": "christelle.rouille@iadvize.com", "mtd_spend": 0.92},
-        {"name": "Simon LIOTIER", "email": "simon.liotier@iadvize.com", "mtd_spend": 0.86},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.58},
-        {"name": "Charlotte BOUISSE", "email": "charlotte.bouisse@iadvize.com", "mtd_spend": 0.34},
-        {"name": "Déborah TACHEAU", "email": "deborah.tacheau@iadvize.com", "mtd_spend": 0.23},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 117.44,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurélie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 77.33,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 75.05,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie Auguste",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Aude LECHAPELAIN",
+          "email": "aude.lechapelain@iadvize.com",
+          "mtd_spend": 52.39
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 51.69
+        },
+        {
+          "name": "Clémentine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 51.18
+        },
+        {
+          "name": "Lilas BLANCHARD",
+          "email": "lilas.blanchard@iadvize.com",
+          "mtd_spend": 50.16
+        },
+        {
+          "name": "Alex",
+          "email": "alexandre.dixneuf@iadvize.com",
+          "mtd_spend": 50.09
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 49.99
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 39.62
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 33.2
+        },
+        {
+          "name": "Mélanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 26.48
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 25.76
+        },
+        {
+          "name": "Florent GOSSELIN",
+          "email": "florent@iadvize.com",
+          "mtd_spend": 25.59,
+          "custom_limit": 100
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 23.57
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 22.69
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 21.92
+        },
+        {
+          "name": "Romain HELES",
+          "email": "romain.heles@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Michaël MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Fx CORNEC",
+          "email": "francois-xavier.cornec@iadvize.com",
+          "mtd_spend": 18.24
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 16.17
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Lisa TRAZZI",
+          "email": "lisa.trazzi@iadvize.com",
+          "mtd_spend": 14.95
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 14.91
+        },
+        {
+          "name": "Hélène FEDIDE",
+          "email": "helene.fedide@iadvize.com",
+          "mtd_spend": 14.41
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "Francesca IANNUZZI",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 13.09
+        },
+        {
+          "name": "Damien ALLIAU",
+          "email": "damien.alliau@iadvize.com",
+          "mtd_spend": 12.15
+        },
+        {
+          "name": "Lilas CHAMPOT",
+          "email": "lilas.champot@iadvize.com",
+          "mtd_spend": 10.61
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 9.55
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Tiphaine PAIREL",
+          "email": "tiphaine.pairel@iadvize.com",
+          "mtd_spend": 9.38
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloé MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Cyrus WEIR",
+          "email": "cyrus.weir@iadvize.com",
+          "mtd_spend": 5.42
+        },
+        {
+          "name": "Aïssatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Sylvie",
+          "email": "sylvie.quach_hiep@iadvize.com",
+          "mtd_spend": 4.77
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 4.67
+        },
+        {
+          "name": "Audrey RAGUENEAU",
+          "email": "audrey.ragueneau@iadvize.com",
+          "mtd_spend": 4.14
+        },
+        {
+          "name": "Simon GELIN",
+          "email": "simon.gelin@iadvize.com",
+          "mtd_spend": 3.67
+        },
+        {
+          "name": "Pierre LE CHANU",
+          "email": "pierre.lechanu@iadvize.com",
+          "mtd_spend": 3.52
+        },
+        {
+          "name": "Marine",
+          "email": "marine.pereira@iadvize.com",
+          "mtd_spend": 3.45
+        },
+        {
+          "name": "Anaïs MALO",
+          "email": "anais.malo@iadvize.com",
+          "mtd_spend": 3.39
+        },
+        {
+          "name": "Celia BUGNIOT",
+          "email": "celia.bugniot@iadvize.com",
+          "mtd_spend": 3.3
+        },
+        {
+          "name": "Etienne Rouillard",
+          "email": "etienne.rouillard@iadvize.com",
+          "mtd_spend": 2.87
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 2.67
+        },
+        {
+          "name": "Chloé PUGNETTI",
+          "email": "chloe.pugnetti@iadvize.com",
+          "mtd_spend": 2.56
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Alexandre",
+          "email": "alexandre.lebrun@iadvize.com",
+          "mtd_spend": 1.81
+        },
+        {
+          "name": "Nathan MIERMONT",
+          "email": "nathan.miermont@iadvize.com",
+          "mtd_spend": 1.78
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Aymeric AITAMER",
+          "email": "aymeric.aitamer@iadvize.com",
+          "mtd_spend": 1.44
+        },
+        {
+          "name": "Tillie DEGEORGES",
+          "email": "tillie.degeorges@iadvize.com",
+          "mtd_spend": 1.32
+        },
+        {
+          "name": "Axel ROLLO",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Christelle ROUILLE",
+          "email": "christelle.rouille@iadvize.com",
+          "mtd_spend": 0.92
+        },
+        {
+          "name": "Simon LIOTIER",
+          "email": "simon.liotier@iadvize.com",
+          "mtd_spend": 0.86
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Déborah TACHEAU",
+          "email": "deborah.tacheau@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true,
       "daily_delta": 83.81
@@ -458,82 +1610,775 @@ const USAGE_DATA = {
       "standard_seats": 120,
       "premium_seats": 15,
       "users_with_spend": [
-        {"name": "Kilian Hauray", "email": "kilian@iadvize.com", "mtd_spend": 117.44, "custom_limit": 150},
-        {"name": "Aurélie MULLER", "email": "aurelie.muller@iadvize.com", "mtd_spend": 81.02, "custom_limit": 75},
-        {"name": "Nathanaelle DELANNET", "email": "nathanaelle.delannet@iadvize.com", "mtd_spend": 77.33, "custom_limit": 75},
-        {"name": "Elsa GUERINEAU", "email": "elsa.guerineau@iadvize.com", "mtd_spend": 75.05, "custom_limit": 75},
-        {"name": "Flavie AUGUSTE", "email": "flavie.auguste@iadvize.com", "mtd_spend": 52.94, "custom_limit": 75},
-        {"name": "Aude LECHAPELAIN", "email": "aude.lechapelain@iadvize.com", "mtd_spend": 52.39},
-        {"name": "Yann ROLLAND", "email": "yann.rolland@iadvize.com", "mtd_spend": 51.69},
-        {"name": "Clémentine MAQUEDA", "email": "clementine.maqueda@iadvize.com", "mtd_spend": 51.18},
-        {"name": "Lilas BLANCHARD", "email": "lilas.blanchard@iadvize.com", "mtd_spend": 50.16},
-        {"name": "Alex", "email": "alexandre.dixneuf@iadvize.com", "mtd_spend": 50.09},
-        {"name": "Ted YUAN", "email": "ted.yuan@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Sylvain BAILLY", "email": "sylvain.bailly@iadvize.com", "mtd_spend": 50.00},
-        {"name": "Axel PERTROT", "email": "axel.pertrot@iadvize.com", "mtd_spend": 49.99},
-        {"name": "Julie", "email": "julie.moreau@iadvize.com", "mtd_spend": 39.62},
-        {"name": "Guillaume FIDAIRE", "email": "guillaume.fidaire@iadvize.com", "mtd_spend": 36.53},
-        {"name": "Benjamin GREDAT", "email": "benjamin.gredat@iadvize.com", "mtd_spend": 33.20},
-        {"name": "Mélanie", "email": "melanie.hery@iadvize.com", "mtd_spend": 29.47},
-        {"name": "Sebastien", "email": "sebastien.bocahut@iadvize.com", "mtd_spend": 28.42},
-        {"name": "Damien SEVET", "email": "damien.sevet@iadvize.com", "mtd_spend": 27.81},
-        {"name": "Alexis CHANTEL", "email": "alexis.chantel@iadvize.com", "mtd_spend": 26.48},
-        {"name": "Lise KELLER", "email": "lise.keller@iadvize.com", "mtd_spend": 25.76},
-        {"name": "Florent GOSSELIN", "email": "florent@iadvize.com", "mtd_spend": 25.59, "custom_limit": 100},
-        {"name": "Fx CORNEC", "email": "francois-xavier.cornec@iadvize.com", "mtd_spend": 24.52},
-        {"name": "Yves Le Grouyer", "email": "yves.legrouyer@iadvize.com", "mtd_spend": 23.64},
-        {"name": "Emilie LUCAS", "email": "emilie.lucas@iadvize.com", "mtd_spend": 22.69},
-        {"name": "David BONNEMAISON", "email": "david.bonnemaison@iadvize.com", "mtd_spend": 21.92},
-        {"name": "Romain HELES", "email": "romain.heles@iadvize.com", "mtd_spend": 20.03},
-        {"name": "Maelle DELAUNAY", "email": "maelle.delaunay@iadvize.com", "mtd_spend": 20.03},
-        {"name": "Michaël MAILLOT", "email": "michael.maillot@iadvize.com", "mtd_spend": 19.64},
-        {"name": "Mathieu CHEVIRON", "email": "mathieu.cheviron@iadvize.com", "mtd_spend": 19.44},
-        {"name": "Sophie CHEVALIER", "email": "sophie.chevalier@iadvize.com", "mtd_spend": 18.72},
-        {"name": "Clara URVOYS", "email": "clara.urvoys@iadvize.com", "mtd_spend": 15.24},
-        {"name": "Craig LEBLANC", "email": "craig.leblanc@iadvize.com", "mtd_spend": 14.91},
-        {"name": "Hélène FEDIDE", "email": "helene.fedide@iadvize.com", "mtd_spend": 14.41},
-        {"name": "Maxime HAESMANS", "email": "maxime.haesmans@iadvize.com", "mtd_spend": 13.71},
-        {"name": "Francesca IANNUZZI", "email": "francesca.iannuzzi@iadvize.com", "mtd_spend": 13.09},
-        {"name": "Fabien ABBALLE", "email": "fabien.abballe@iadvize.com", "mtd_spend": 12.48},
-        {"name": "Damien ALLIAU", "email": "damien.alliau@iadvize.com", "mtd_spend": 12.15},
-        {"name": "Lilas CHAMPOT", "email": "lilas.champot@iadvize.com", "mtd_spend": 10.61},
-        {"name": "Gabriel ANDREA", "email": "gabriel.andrea@iadvize.com", "mtd_spend": 9.55},
-        {"name": "Julien FERRE", "email": "julien.ferre@iadvize.com", "mtd_spend": 9.49},
-        {"name": "Tiphaine PAIREL", "email": "tiphaine.pairel@iadvize.com", "mtd_spend": 9.38},
-        {"name": "Guillaume PERRAULT", "email": "guillaume@iadvize.com", "mtd_spend": 9.07},
-        {"name": "Chloé MARTINEAU", "email": "chloe.martineau@iadvize.com", "mtd_spend": 7.80},
-        {"name": "Arno LESAINT", "email": "arno.lesaint@iadvize.com", "mtd_spend": 7.27},
-        {"name": "Cyrus WEIR", "email": "cyrus.weir@iadvize.com", "mtd_spend": 5.42},
-        {"name": "Aïssatou GASSAMA", "email": "aissatou.gassama@iadvize.com", "mtd_spend": 4.98},
-        {"name": "Sylvie", "email": "sylvie.quach_hiep@iadvize.com", "mtd_spend": 4.77},
-        {"name": "Chloé PUGNETTI", "email": "chloe.pugnetti@iadvize.com", "mtd_spend": 4.73},
-        {"name": "Tristan KAYSER", "email": "tristan.kayser@iadvize.com", "mtd_spend": 4.67},
-        {"name": "Audrey RAGUENEAU", "email": "audrey.ragueneau@iadvize.com", "mtd_spend": 4.14},
-        {"name": "Simon GELIN", "email": "simon.gelin@iadvize.com", "mtd_spend": 3.67},
-        {"name": "Pierre LE CHANU", "email": "pierre.lechanu@iadvize.com", "mtd_spend": 3.52},
-        {"name": "Marine", "email": "marine.pereira@iadvize.com", "mtd_spend": 3.45},
-        {"name": "Anaïs MALO", "email": "anais.malo@iadvize.com", "mtd_spend": 3.39},
-        {"name": "Celia BUGNIOT", "email": "celia.bugniot@iadvize.com", "mtd_spend": 3.30},
-        {"name": "Etienne Rouillard", "email": "etienne.rouillard@iadvize.com", "mtd_spend": 2.87},
-        {"name": "Nicolas MORISSEAU", "email": "nicolas.morisseau@iadvize.com", "mtd_spend": 2.68},
-        {"name": "Clotilde GUIBERT", "email": "clotilde.guibert@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Basile QUINCHON", "email": "basile.quinchon@iadvize.com", "mtd_spend": 1.94},
-        {"name": "Alexandre", "email": "alexandre.lebrun@iadvize.com", "mtd_spend": 1.81},
-        {"name": "Nathan MIERMONT", "email": "nathan.miermont@iadvize.com", "mtd_spend": 1.78},
-        {"name": "Ludo", "email": "ludovic.dupont@iadvize.com", "mtd_spend": 1.68},
-        {"name": "Pierre GAULTIER", "email": "pierre.gaultier@iadvize.com", "mtd_spend": 1.46},
-        {"name": "Aymeric AITAMER", "email": "aymeric.aitamer@iadvize.com", "mtd_spend": 1.44},
-        {"name": "Tillie DEGEORGES", "email": "tillie.degeorges@iadvize.com", "mtd_spend": 1.32},
-        {"name": "Axel ROLLO", "email": "axel.rollo@iadvize.com", "mtd_spend": 0.94},
-        {"name": "Christelle ROUILLE", "email": "christelle.rouille@iadvize.com", "mtd_spend": 0.92},
-        {"name": "Simon LIOTIER", "email": "simon.liotier@iadvize.com", "mtd_spend": 0.86},
-        {"name": "Adrien BONVIN", "email": "adrien.bonvin@iadvize.com", "mtd_spend": 0.58},
-        {"name": "Charlotte BOUISSE", "email": "charlotte.bouisse@iadvize.com", "mtd_spend": 0.34},
-        {"name": "Déborah TACHEAU", "email": "deborah.tacheau@iadvize.com", "mtd_spend": 0.23},
-        {"name": "Victor BERIARD", "email": "victor.beriard@iadvize.com", "mtd_spend": 0.15}
+        {
+          "name": "Kilian Hauray",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 117.44,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurélie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 77.33,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 75.05,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Aude LECHAPELAIN",
+          "email": "aude.lechapelain@iadvize.com",
+          "mtd_spend": 52.39
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 51.69
+        },
+        {
+          "name": "Clémentine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 51.18
+        },
+        {
+          "name": "Lilas BLANCHARD",
+          "email": "lilas.blanchard@iadvize.com",
+          "mtd_spend": 50.16
+        },
+        {
+          "name": "Alex",
+          "email": "alexandre.dixneuf@iadvize.com",
+          "mtd_spend": 50.09
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 49.99
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 39.62
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 33.2
+        },
+        {
+          "name": "Mélanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 29.47
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 27.81
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 26.48
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 25.76
+        },
+        {
+          "name": "Florent GOSSELIN",
+          "email": "florent@iadvize.com",
+          "mtd_spend": 25.59,
+          "custom_limit": 100
+        },
+        {
+          "name": "Fx CORNEC",
+          "email": "francois-xavier.cornec@iadvize.com",
+          "mtd_spend": 24.52
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 22.69
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 21.92
+        },
+        {
+          "name": "Romain HELES",
+          "email": "romain.heles@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Michaël MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 19.44
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 14.91
+        },
+        {
+          "name": "Hélène FEDIDE",
+          "email": "helene.fedide@iadvize.com",
+          "mtd_spend": 14.41
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "Francesca IANNUZZI",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 13.09
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 12.48
+        },
+        {
+          "name": "Damien ALLIAU",
+          "email": "damien.alliau@iadvize.com",
+          "mtd_spend": 12.15
+        },
+        {
+          "name": "Lilas CHAMPOT",
+          "email": "lilas.champot@iadvize.com",
+          "mtd_spend": 10.61
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 9.55
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Tiphaine PAIREL",
+          "email": "tiphaine.pairel@iadvize.com",
+          "mtd_spend": 9.38
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloé MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 7.27
+        },
+        {
+          "name": "Cyrus WEIR",
+          "email": "cyrus.weir@iadvize.com",
+          "mtd_spend": 5.42
+        },
+        {
+          "name": "Aïssatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Sylvie",
+          "email": "sylvie.quach_hiep@iadvize.com",
+          "mtd_spend": 4.77
+        },
+        {
+          "name": "Chloé PUGNETTI",
+          "email": "chloe.pugnetti@iadvize.com",
+          "mtd_spend": 4.73
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 4.67
+        },
+        {
+          "name": "Audrey RAGUENEAU",
+          "email": "audrey.ragueneau@iadvize.com",
+          "mtd_spend": 4.14
+        },
+        {
+          "name": "Simon GELIN",
+          "email": "simon.gelin@iadvize.com",
+          "mtd_spend": 3.67
+        },
+        {
+          "name": "Pierre LE CHANU",
+          "email": "pierre.lechanu@iadvize.com",
+          "mtd_spend": 3.52
+        },
+        {
+          "name": "Marine",
+          "email": "marine.pereira@iadvize.com",
+          "mtd_spend": 3.45
+        },
+        {
+          "name": "Anaïs MALO",
+          "email": "anais.malo@iadvize.com",
+          "mtd_spend": 3.39
+        },
+        {
+          "name": "Celia BUGNIOT",
+          "email": "celia.bugniot@iadvize.com",
+          "mtd_spend": 3.3
+        },
+        {
+          "name": "Etienne Rouillard",
+          "email": "etienne.rouillard@iadvize.com",
+          "mtd_spend": 2.87
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 2.68
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Alexandre",
+          "email": "alexandre.lebrun@iadvize.com",
+          "mtd_spend": 1.81
+        },
+        {
+          "name": "Nathan MIERMONT",
+          "email": "nathan.miermont@iadvize.com",
+          "mtd_spend": 1.78
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Aymeric AITAMER",
+          "email": "aymeric.aitamer@iadvize.com",
+          "mtd_spend": 1.44
+        },
+        {
+          "name": "Tillie DEGEORGES",
+          "email": "tillie.degeorges@iadvize.com",
+          "mtd_spend": 1.32
+        },
+        {
+          "name": "Axel ROLLO",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Christelle ROUILLE",
+          "email": "christelle.rouille@iadvize.com",
+          "mtd_spend": 0.92
+        },
+        {
+          "name": "Simon LIOTIER",
+          "email": "simon.liotier@iadvize.com",
+          "mtd_spend": 0.86
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Déborah TACHEAU",
+          "email": "deborah.tacheau@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
       ],
       "extra_usage_enabled": true,
       "daily_delta": 28.18
+    },
+    {
+      "date": "2026-05-28",
+      "balance": 266.52,
+      "mtd_spent": 1565.66,
+      "pct_used": 78,
+      "reset_date": "2026-06-01",
+      "total_users": 135,
+      "standard_seats": 120,
+      "premium_seats": 15,
+      "users_with_spend": [
+        {
+          "name": "Kilian HAURAY",
+          "email": "kilian@iadvize.com",
+          "mtd_spend": 117.44,
+          "custom_limit": 150
+        },
+        {
+          "name": "Aurélie MULLER",
+          "email": "aurelie.muller@iadvize.com",
+          "mtd_spend": 81.02,
+          "custom_limit": 75
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 77.33,
+          "custom_limit": 75
+        },
+        {
+          "name": "Elsa GUERINEAU",
+          "email": "elsa.guerineau@iadvize.com",
+          "mtd_spend": 75.05,
+          "custom_limit": 75
+        },
+        {
+          "name": "Flavie AUGUSTE",
+          "email": "flavie.auguste@iadvize.com",
+          "mtd_spend": 52.94,
+          "custom_limit": 75
+        },
+        {
+          "name": "Aude LECHAPELAIN",
+          "email": "aude.lechapelain@iadvize.com",
+          "mtd_spend": 52.39
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 51.69
+        },
+        {
+          "name": "Clémentine MAQUEDA",
+          "email": "clementine.maqueda@iadvize.com",
+          "mtd_spend": 51.18
+        },
+        {
+          "name": "Lilas BLANCHARD",
+          "email": "lilas.blanchard@iadvize.com",
+          "mtd_spend": 50.16
+        },
+        {
+          "name": "Alex",
+          "email": "alexandre.dixneuf@iadvize.com",
+          "mtd_spend": 50.09
+        },
+        {
+          "name": "Ted YUAN",
+          "email": "ted.yuan@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Sylvain BAILLY",
+          "email": "sylvain.bailly@iadvize.com",
+          "mtd_spend": 50.0
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 49.99
+        },
+        {
+          "name": "Julie",
+          "email": "julie.moreau@iadvize.com",
+          "mtd_spend": 39.62
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 36.53
+        },
+        {
+          "name": "Mélanie",
+          "email": "melanie.hery@iadvize.com",
+          "mtd_spend": 35.78
+        },
+        {
+          "name": "Benjamin GREDAT",
+          "email": "benjamin.gredat@iadvize.com",
+          "mtd_spend": 33.2
+        },
+        {
+          "name": "Sebastien",
+          "email": "sebastien.bocahut@iadvize.com",
+          "mtd_spend": 28.42
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 27.81
+        },
+        {
+          "name": "Alexis CHANTEL",
+          "email": "alexis.chantel@iadvize.com",
+          "mtd_spend": 26.48
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 25.76
+        },
+        {
+          "name": "Florent GOSSELIN",
+          "email": "florent@iadvize.com",
+          "mtd_spend": 25.59,
+          "custom_limit": 100
+        },
+        {
+          "name": "Fx CORNEC",
+          "email": "francois-xavier.cornec@iadvize.com",
+          "mtd_spend": 24.52
+        },
+        {
+          "name": "Yves Le Grouyer",
+          "email": "yves.legrouyer@iadvize.com",
+          "mtd_spend": 23.64
+        },
+        {
+          "name": "Emilie LUCAS",
+          "email": "emilie.lucas@iadvize.com",
+          "mtd_spend": 22.69
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 21.92
+        },
+        {
+          "name": "Romain HELES",
+          "email": "romain.heles@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Maelle DELAUNAY",
+          "email": "maelle.delaunay@iadvize.com",
+          "mtd_spend": 20.03
+        },
+        {
+          "name": "Michaël MAILLOT",
+          "email": "michael.maillot@iadvize.com",
+          "mtd_spend": 19.64
+        },
+        {
+          "name": "Mathieu CHEVIRON",
+          "email": "mathieu.cheviron@iadvize.com",
+          "mtd_spend": 19.44
+        },
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 18.84
+        },
+        {
+          "name": "Sophie CHEVALIER",
+          "email": "sophie.chevalier@iadvize.com",
+          "mtd_spend": 18.72
+        },
+        {
+          "name": "Arno LESAINT",
+          "email": "arno.lesaint@iadvize.com",
+          "mtd_spend": 17.87
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 15.68
+        },
+        {
+          "name": "Clara URVOYS",
+          "email": "clara.urvoys@iadvize.com",
+          "mtd_spend": 15.24
+        },
+        {
+          "name": "Lisa TRAZZI",
+          "email": "lisa.trazzi@iadvize.com",
+          "mtd_spend": 14.95
+        },
+        {
+          "name": "Craig LEBLANC",
+          "email": "craig.leblanc@iadvize.com",
+          "mtd_spend": 14.91
+        },
+        {
+          "name": "Hélène FEDIDE",
+          "email": "helene.fedide@iadvize.com",
+          "mtd_spend": 14.41
+        },
+        {
+          "name": "Maxime HAESMANS",
+          "email": "maxime.haesmans@iadvize.com",
+          "mtd_spend": 13.71
+        },
+        {
+          "name": "Francesca IANNUZZI",
+          "email": "francesca.iannuzzi@iadvize.com",
+          "mtd_spend": 13.09
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 12.48
+        },
+        {
+          "name": "Damien ALLIAU",
+          "email": "damien.alliau@iadvize.com",
+          "mtd_spend": 12.15
+        },
+        {
+          "name": "Lilas CHAMPOT",
+          "email": "lilas.champot@iadvize.com",
+          "mtd_spend": 10.61
+        },
+        {
+          "name": "Tiphaine PAIREL",
+          "email": "tiphaine.pairel@iadvize.com",
+          "mtd_spend": 9.86
+        },
+        {
+          "name": "Gabriel ANDREA",
+          "email": "gabriel.andrea@iadvize.com",
+          "mtd_spend": 9.55
+        },
+        {
+          "name": "Julien FERRE",
+          "email": "julien.ferre@iadvize.com",
+          "mtd_spend": 9.49
+        },
+        {
+          "name": "Guillaume PERRAULT",
+          "email": "guillaume@iadvize.com",
+          "mtd_spend": 9.07
+        },
+        {
+          "name": "Chloé MARTINEAU",
+          "email": "chloe.martineau@iadvize.com",
+          "mtd_spend": 7.8
+        },
+        {
+          "name": "Marine",
+          "email": "marine.pereira@iadvize.com",
+          "mtd_spend": 6.87
+        },
+        {
+          "name": "Audrey RAGUENEAU",
+          "email": "audrey.ragueneau@iadvize.com",
+          "mtd_spend": 6.09
+        },
+        {
+          "name": "Cyrus WEIR",
+          "email": "cyrus.weir@iadvize.com",
+          "mtd_spend": 5.42
+        },
+        {
+          "name": "Aïssatou GASSAMA",
+          "email": "aissatou.gassama@iadvize.com",
+          "mtd_spend": 4.98
+        },
+        {
+          "name": "Sylvie",
+          "email": "sylvie.quach_hiep@iadvize.com",
+          "mtd_spend": 4.77
+        },
+        {
+          "name": "Chloé PUGNETTI",
+          "email": "chloe.pugnetti@iadvize.com",
+          "mtd_spend": 4.73
+        },
+        {
+          "name": "Tristan KAYSER",
+          "email": "tristan.kayser@iadvize.com",
+          "mtd_spend": 4.67
+        },
+        {
+          "name": "Celia BUGNIOT",
+          "email": "celia.bugniot@iadvize.com",
+          "mtd_spend": 4.03
+        },
+        {
+          "name": "Simon GELIN",
+          "email": "simon.gelin@iadvize.com",
+          "mtd_spend": 3.67
+        },
+        {
+          "name": "Pierre LE CHANU",
+          "email": "pierre.lechanu@iadvize.com",
+          "mtd_spend": 3.52
+        },
+        {
+          "name": "Anaïs MALO",
+          "email": "anais.malo@iadvize.com",
+          "mtd_spend": 3.39
+        },
+        {
+          "name": "Etienne Rouillard",
+          "email": "etienne.rouillard@iadvize.com",
+          "mtd_spend": 2.87
+        },
+        {
+          "name": "Clotilde GUIBERT",
+          "email": "clotilde.guibert@iadvize.com",
+          "mtd_spend": 1.94
+        },
+        {
+          "name": "Alexandre",
+          "email": "alexandre.lebrun@iadvize.com",
+          "mtd_spend": 1.81
+        },
+        {
+          "name": "Anaïs ROCHAIS",
+          "email": "anais.rochais@iadvize.com",
+          "mtd_spend": 1.69
+        },
+        {
+          "name": "Ludo",
+          "email": "ludovic.dupont@iadvize.com",
+          "mtd_spend": 1.68
+        },
+        {
+          "name": "Pierre GAULTIER",
+          "email": "pierre.gaultier@iadvize.com",
+          "mtd_spend": 1.46
+        },
+        {
+          "name": "Aymeric AITAMER",
+          "email": "aymeric.aitamer@iadvize.com",
+          "mtd_spend": 1.44
+        },
+        {
+          "name": "Tillie DEGEORGES",
+          "email": "tillie.degeorges@iadvize.com",
+          "mtd_spend": 1.32
+        },
+        {
+          "name": "Axel ROLLO",
+          "email": "axel.rollo@iadvize.com",
+          "mtd_spend": 0.94
+        },
+        {
+          "name": "Christelle ROUILLE",
+          "email": "christelle.rouille@iadvize.com",
+          "mtd_spend": 0.92
+        },
+        {
+          "name": "Simon LIOTIER",
+          "email": "simon.liotier@iadvize.com",
+          "mtd_spend": 0.86
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 0.58
+        },
+        {
+          "name": "Sacha TREMOUREUX",
+          "email": "sacha.tremoureux@iadvize.com",
+          "mtd_spend": 0.43
+        },
+        {
+          "name": "Charlotte BOUISSE",
+          "email": "charlotte.bouisse@iadvize.com",
+          "mtd_spend": 0.34
+        },
+        {
+          "name": "Déborah TACHEAU",
+          "email": "deborah.tacheau@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Victor BERIARD",
+          "email": "victor.beriard@iadvize.com",
+          "mtd_spend": 0.15
+        }
+      ],
+      "extra_usage_enabled": true,
+      "daily_delta": 55.45
     }
   ]
 };
