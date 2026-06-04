@@ -1654,13 +1654,103 @@ const USAGE_DATA = {
       ],
       "extra_usage_enabled": true,
       "daily_delta": null
+    },
+    {
+      "date": "2026-06-04",
+      "balance": -0.01,
+      "mtd_spent": 192.61,
+      "pct_used": 10,
+      "reset_date": "2026-07-01",
+      "total_users": 135,
+      "standard_seats": 120,
+      "premium_seats": 15,
+      "users_with_spend": [
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 50.03
+        },
+        {
+          "name": "Lisa TRAZZI",
+          "email": "lisa.trazzi@iadvize.com",
+          "mtd_spend": 32.51
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 19.48
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 15.59
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 14.9,
+          "custom_limit": 75
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 11.55
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 10.92
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 8.55
+        },
+        {
+          "name": "Christelle ROUILLE",
+          "email": "christelle.rouille@iadvize.com",
+          "mtd_spend": 8.25
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 7.92
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 7.38
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 4.72
+        },
+        {
+          "name": "Sacha TREMOUREUX",
+          "email": "sacha.tremoureux@iadvize.com",
+          "mtd_spend": 0.66
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Romain HELES",
+          "email": "romain.heles@iadvize.com",
+          "mtd_spend": 0.16
+        }
+      ],
+      "extra_usage_enabled": true,
+      "daily_delta": 155.93
     }
   ]
 };
 // ===== END DATA STORE =====
 
 function render(data) {
-  const entries = data.entries || [];
+  const entries = (data.entries || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   if (entries.length === 0) {
     document.getElementById('mainContent').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">Aucune donnee enregistree.</div>';
     return;
@@ -1682,7 +1772,7 @@ function render(data) {
     alertEl.textContent = 'Attention : ' + pct + '% du budget mensuel consommé.';
   }
 
-  const dailyDelta = prev ? +(latest.mtd_spent - prev.mtd_spent).toFixed(2) : null;
+  const dailyDelta = (latest.daily_delta !== undefined) ? latest.daily_delta : (prev ? +(latest.mtd_spent - prev.mtd_spent).toFixed(2) : null);
 
   const pctClass = pct >= 90 ? 'danger' : pct >= 75 ? 'warning' : 'ok';
   document.getElementById('cardsContainer').innerHTML = `
@@ -1704,7 +1794,7 @@ function render(data) {
     <div class="card">
       <div class="label">Delta quotidien</div>
       <div class="value ${dailyDelta !== null ? (dailyDelta > 0 ? 'delta-positive' : 'delta-negative') : ''}">${dailyDelta !== null ? (dailyDelta >= 0 ? '+' : '') + formatEur(dailyDelta) : 'N/A'}</div>
-      <div class="detail">${dailyDelta !== null ? 'vs. ' + prev.date : 'Premiere entree'}</div>
+      <div class="detail">${dailyDelta !== null ? 'vs. ' + prev.date : 'Reset / 1re entrée du mois'}</div>
     </div>
     <div class="card ${(latest.users_with_spend || []).length > 20 ? 'warning' : ''}">
       <div class="label">En extra-usage</div>
@@ -1733,7 +1823,7 @@ function render(data) {
     }
   });
 
-  const deltas = entries.map((e, i) => i === 0 ? 0 : +(e.mtd_spent - entries[i-1].mtd_spent).toFixed(2));
+  const deltas = entries.map((e, i) => (e.daily_delta !== undefined) ? e.daily_delta : (i === 0 ? null : +(e.mtd_spent - entries[i-1].mtd_spent).toFixed(2)));
   new Chart(document.getElementById('deltaChart'), {
     type: 'bar',
     data: { labels, datasets: [{ label: 'Delta quotidien', data: deltas, backgroundColor: deltas.map(d => d >= 0 ? 'rgba(224,49,49,0.7)' : 'rgba(43,138,62,0.7)'), borderRadius: 4 }] },
