@@ -1744,11 +1744,100 @@ const USAGE_DATA = {
       ],
       "extra_usage_enabled": true,
       "daily_delta": 155.93
+    },
+    {
+      "date": "2026-06-08",
+      "balance": -0.01,
+      "mtd_spent": 192.61,
+      "pct_used": 10,
+      "reset_date": "2026-07-01",
+      "total_users": 136,
+      "standard_seats": 119,
+      "premium_seats": 17,
+      "users_with_spend": [
+        {
+          "name": "Nicolas MORISSEAU",
+          "email": "nicolas.morisseau@iadvize.com",
+          "mtd_spend": 50.03
+        },
+        {
+          "name": "Lisa TRAZZI",
+          "email": "lisa.trazzi@iadvize.com",
+          "mtd_spend": 32.51
+        },
+        {
+          "name": "Axel PERTROT",
+          "email": "axel.pertrot@iadvize.com",
+          "mtd_spend": 19.48
+        },
+        {
+          "name": "David BONNEMAISON",
+          "email": "david.bonnemaison@iadvize.com",
+          "mtd_spend": 15.59
+        },
+        {
+          "name": "Nathanaelle DELANNET",
+          "email": "nathanaelle.delannet@iadvize.com",
+          "mtd_spend": 14.9,
+          "custom_limit": 75
+        },
+        {
+          "name": "Fabien ABBALLE",
+          "email": "fabien.abballe@iadvize.com",
+          "mtd_spend": 11.55
+        },
+        {
+          "name": "Yann ROLLAND",
+          "email": "yann.rolland@iadvize.com",
+          "mtd_spend": 10.92
+        },
+        {
+          "name": "Guillaume FIDAIRE",
+          "email": "guillaume.fidaire@iadvize.com",
+          "mtd_spend": 8.55
+        },
+        {
+          "name": "Christelle ROUILLE",
+          "email": "christelle.rouille@iadvize.com",
+          "mtd_spend": 8.25
+        },
+        {
+          "name": "Lise KELLER",
+          "email": "lise.keller@iadvize.com",
+          "mtd_spend": 7.92
+        },
+        {
+          "name": "Basile QUINCHON",
+          "email": "basile.quinchon@iadvize.com",
+          "mtd_spend": 7.38
+        },
+        {
+          "name": "Adrien BONVIN",
+          "email": "adrien.bonvin@iadvize.com",
+          "mtd_spend": 4.72
+        },
+        {
+          "name": "Sacha TREMOUREUX",
+          "email": "sacha.tremoureux@iadvize.com",
+          "mtd_spend": 0.66
+        },
+        {
+          "name": "Damien SEVET",
+          "email": "damien.sevet@iadvize.com",
+          "mtd_spend": 0.23
+        },
+        {
+          "name": "Romain HELES",
+          "email": "romain.heles@iadvize.com",
+          "mtd_spend": 0.16
+        }
+      ],
+      "extra_usage_enabled": true,
+      "daily_delta": 0.0
     }
   ]
 };
 // ===== END DATA STORE =====
-
 function render(data) {
   const entries = (data.entries || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   if (entries.length === 0) {
